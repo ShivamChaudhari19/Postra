@@ -12,15 +12,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.shivam.postra.data.remote.api.BlogApiImpl
-import com.shivam.postra.data.remote.client.HttpClientFactory
-import com.shivam.postra.data.repositoryImpl.BlogRepositoryImpl
-import com.shivam.postra.domain.model.Blog
 import com.shivam.postra.presentation.blog_list.BlogListScreen
-import com.shivam.postra.presentation.blog_list.BlogListState
 import com.shivam.postra.presentation.blog_list.BlogListViewModel
 import com.shivam.postra.presentation.theme.PostraTheme
-import io.ktor.client.engine.okhttp.OkHttp
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
     override  fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +23,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PostraTheme {
-                val viewModel=viewModel<BlogListViewModel>()
+                val viewModel= koinViewModel<BlogListViewModel>()
                 val state by  viewModel.state.collectAsStateWithLifecycle()
                 Scaffold(modifier = Modifier.fillMaxSize(),
                     contentWindowInsets = WindowInsets(0)
